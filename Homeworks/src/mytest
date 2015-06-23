@@ -1,0 +1,131 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Mytest extends Nomer{
+	private int ID;
+	private String Name;
+	private String Famil;
+	Mytest()
+	{
+	    ID=0;
+	    Name="";
+	    Famil="";
+	}
+	int getID(){return ID;}
+
+	String getName(){return Name;}
+
+	String getFamil(){return Famil;}
+	
+	public void setID() {
+	    this.ID +=1;
+	}
+	public void setName(String name) {
+	    this.Name = name;
+	}
+
+	public void setFamil(String famil) {
+	    this.Famil = famil;
+	}
+		
+	public String Skleyka(int a,String b,String c, int d, String e)
+	{
+		String s;
+		s="N="+String.valueOf(a)+" "+ b+" "+c +", "+"Номер:"+String.valueOf(d)+", "+"Тип:"+e;
+		return s;
+	}
+	
+	public static void main(String[] args) {
+		Mytest obj = new Mytest();
+		Nomer obj1 = new Nomer();
+		Category obj2 = new Category();
+		Scanner scan = new Scanner(System.in);
+		ArrayList<String> list = new ArrayList<>();
+		int x;
+		int y=1;
+		int key=0;
+		while(y!=0)
+		{
+		
+			System.out.println("Меню справочника:");
+			System.out.println("1-Добавить контакт:");
+			System.out.println("2-На экран весь справочник");
+			System.out.println("0-Выход:");
+			x=Integer.parseInt(scan.nextLine());
+			y=x;			
+			switch(x)
+			{
+			case 1:
+				obj.setID();
+				System.out.println("Введите Имя:");
+				obj.setName(scan.nextLine());
+				System.out.println("Введите Фамилию:");
+				obj.setFamil(scan.nextLine());
+				System.out.println("Введите номер:");
+				obj1.setNumber(Integer.parseInt(scan.nextLine()));
+				System.out.println("Введите тип номера:");
+				obj1.setTip(scan.nextLine());
+				list.add(obj.Skleyka(obj.getID(),obj.getName(),obj.getFamil(),obj1.getNumber(), obj1.getTip()));
+				System.out.println("Какой категории отнесём? Домашний (нажмите один), Рабочий(нажмите два), Друзья (нажмите три:");
+				key=Integer.parseInt(scan.nextLine());
+				if(key==1) obj2.Dom.add(obj.Skleyka(obj.getID(),obj.getName(),obj.getFamil(),obj1.getNumber(), obj1.getTip()));
+				if(key==2) obj2.Work.add(obj.Skleyka(obj.getID(),obj.getName(),obj.getFamil(),obj1.getNumber(), obj1.getTip()));
+				if(key==3) obj2.Friends.add(obj.Skleyka(obj.getID(),obj.getName(),obj.getFamil(),obj1.getNumber(), obj1.getTip()));
+				break;
+			case 2: 
+				System.out.println("Вывести? Домашний (нажмите один), Рабочий(нажмите два), Друзья (нажмите три):");
+				key=Integer.parseInt(scan.nextLine());
+				if(key==1) {
+					System.out.println("Дом:");
+					 for(int i = 0; i < obj2.Dom.size(); i++)
+			            {
+						 System.out.println(obj2.Dom.get(i));
+			            }
+				}
+				if(key==2) {
+					System.out.println("Работа:");
+					 for(int i = 0; i < obj2.Work.size(); i++)
+			            {
+						 System.out.println(obj2.Work.get(i));
+			            }
+				}
+				if(key==3) {
+					System.out.println("Друзья:");
+					 for(int i = 0; i < obj2.Friends.size(); i++)
+			            {
+						 System.out.println(obj2.Friends.get(i));
+			            }
+				}
+				break;
+			case 0:
+				if(y==0) break;
+				break;
+			}
+			
+		}
+    }
+}
+class Nomer extends Category
+{
+	private String Tip;
+	private int Number;
+	Nomer()
+	{
+		Tip="";
+		Number=0;
+	}
+	String getTip(){return Tip;}
+	int getNumber(){return Number;}
+	public void setTip(String _Tip)
+	{
+		this.Tip =_Tip;
+	}
+	public void setNumber(int number){
+		this.Number = number;
+	}
+}
+class Category {
+	ArrayList<String> Dom = new ArrayList<>();
+	ArrayList<String> Work = new ArrayList<>();
+	ArrayList<String> Friends = new ArrayList<>();
+}
